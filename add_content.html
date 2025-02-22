@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নতুন বিষয় যোগ করুন - হিলফুল ফুজুল</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        textarea, input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>নতুন বিষয় যোগ করুন - হিলফুল ফুজুল</h1>
+    </header>
+
+    <section>
+        <form onsubmit="addNewContent(event)">
+            <label for="newSectionTitle">নতুন বিষয়ের শিরোনাম:</label>
+            <input type="text" id="newSectionTitle" required>
+
+            <label for="newSectionContent">বিষয়ের বিস্তারিত:</label>
+            <textarea id="newSectionContent" placeholder="এখানে বিষয়ের বিস্তারিত লিখুন..." required></textarea>
+
+            <button type="submit">যোগ করুন</button>
+        </form>
+        <a href="admin.html">এডমিন প্যানেলে ফিরে যান</a>
+    </section>
+
+    <footer>
+        <p>যোগাযোগ: admin@hilfulfujul.com</p>
+        <p>&copy; ২০২৫ হিলফুল ফুজুল। সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+    <script>
+        function addNewContent(event) {
+            event.preventDefault();
+            const title = document.getElementById('newSectionTitle').value;
+            const content = document.getElementById('newSectionContent').value;
+
+            // Here you can implement logic to save the new content
+            // For example, you can save it to Local Storage or send it to a server // For demonstration, we'll save it to Local Storage
+            let existingContent = localStorage.getItem('additionalContent') || '';
+            existingContent += `<h3>${title}</h3><p>${content}</p>`;
+            localStorage.setItem('additionalContent', existingContent);
+            alert('নতুন বিষয় সফলভাবে যোগ করা হয়েছে!');
+        }
+    </script>
+</body>
+</html>

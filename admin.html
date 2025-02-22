@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - হিলফুল ফুজুল</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #e74c3c;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Panel - হিলফুল ফুজুল</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">হোম</a>
+        <a href="edit_about.html">আমাদের সম্পর্কে সম্পাদনা করুন</a>
+        <a href="edit_objectives.html">আমাদের উদ্দেশ্য সম্পাদনা করুন</a>
+        <a href="edit_event.html">অনলাইন আলোচনা সভার তথ্য সম্পাদনা করুন</a>
+        <a href="add_content.html">নতুন বিষয় যোগ করুন</a>
+    </nav>
+
+    <section>
+        <h2>Admin Functions</h2>
+        <p>এখানে আপনি বিভিন্ন কার্যক্রম পরিচালনা করতে পারেন।</p>
+
+        <h3>নাম এবং রঙ পরিবর্তন করুন</h3>
+        <label for="siteName">নতুন নাম:</label>
+        <input type="text" id="siteName" placeholder="নতুন নাম লিখুন...">
+        
+        <label for="siteColor">নতুন রঙ:</label>
+        <input type="color" id="siteColor">
+
+        <button onclick="changeSiteNameAndColor()">সংরক্ষণ করুন</button>
+
+        <h3>বিষয় মুছুন</h3>
+        <label for="deleteContent">মুছতে চান এমন বিষয়ের শিরোনাম:</label>
+        <input type="text" id="deleteContent" placeholder="মুছতে চান এমন বিষয়ের শিরোনাম লিখুন...">
+        <button onclick="deleteContent()">মুছুন</button>
+    </section>
+
+    <footer>
+        <p>যোগাযোগ: admin@hilfulfujul.com</p>
+        <p>&copy; ২০২৫ হিলফুল ফুজুল। সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+    <script>
+        function changeSiteNameAndColor() {
+            const newName = document.getElementById('siteName').value;
+            const newColor = document.getElementById('siteColor').value;
+
+            if (newName) {
+                localStorage.setItem('siteName', newName);
+                document.querySelector('header h1').innerText = newName; // Update header immediately
+            }
+
+            if (newColor) {
+                localStorage.setItem('siteColor', newColor);
+                document.body.style.backgroundColor = newColor; // Change background color immediately
+            }
+
+            alert('নাম এবং রঙ সফলভাবে পরিবর্তন হয়েছে!');
+        }
+
+        function deleteContent() {
+            const contentToDelete = document.getElementById('deleteContent').value;
+            let existingContent = localStorage.getItem('additionalContent') || '';
+
+            // Remove the specified content
+            existingContent = existingContent.replace(new RegExp(`<h3>${contentToDelete}</h3>.*?<p>.*?</p>`, 'g'), '');
+            localStorage.setItem('additionalContent', existingContent);
+            alert('বিষয় সফলভাবে মুছে ফেলা হয়েছে!');
+        }
+    </script>
+</body>
+</html>
